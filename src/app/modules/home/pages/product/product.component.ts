@@ -27,6 +27,7 @@ export class ProductComponent implements OnInit{
   productId: string | any = '' ;
   parsedImages: string[] = [];
   carouselData: any = [];
+
   currentIndex: number = 0;
 
   constructor(

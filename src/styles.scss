@@ -35,7 +35,7 @@
 .form-container {
   border-radius: 4px;
   width: 100%;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 
   .form-group {
     position: relative;
@@ -48,35 +48,38 @@
       display: flex;
       justify-content: flex-start;
       align-items: center;
-      gap: 4px;
-      font-size: 16px;
-      font-weight: 400;
+      gap: 2px;
+      font-size: 14px;
       pointer-events: none;
-      margin-bottom: 4px;
-    }
-
-    .custom-textarea {
-      outline: none;
-      height: 150px;
-      padding: 6px;
-      font-size: 16px;
-      border-radius: 6px;
-      border: 1px solid #dccece;
-      resize: vertical; /* Permite que el usuario cambie el tamaño verticalmente */
     }
 
     .form-input {
       width: 100%;
-      height: 38px;
+      height: 36px;
       box-sizing: border-box;
       padding: 6px;
       font-size: 16px;
       outline: none;
-      border-radius: 6px;
-      border: 1px solid #dccece;
-
-
+      border: none;
+      border-bottom: 1px solid red;
     }
+
+    .form-line {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: red;
+      transform: scale(0);
+      transform-origin: left bottom;
+      transition: transform .4s;
+    }
+
+    .form-input:focus ~ .form-line {
+      transform: scale(1);
+    }
+
   }
 }
 

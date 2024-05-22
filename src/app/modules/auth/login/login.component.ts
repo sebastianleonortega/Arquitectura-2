@@ -3,6 +3,7 @@ import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 import {CommonModule} from "@angular/common";
 import {AuthService} from "../service/auth.service";
 import {Router} from "@angular/router";
+import {InputMaskDirective} from "../../../core/directives/input-mask.directive";
 
 @Component({
   selector: 'app-login',
@@ -11,6 +12,7 @@ import {Router} from "@angular/router";
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
+    InputMaskDirective,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
@@ -50,6 +52,10 @@ export class LoginComponent implements OnInit {
         localStorage.setItem("refresh_token", r.refresh_token)
       }
     })
+  }
+
+  register() {
+    this._route.navigateByUrl('/register').then();
   }
 
 }

@@ -1,36 +1,34 @@
-<div class="login-container">
-  <div class="login-wrapper">
-    <img src="assets/images/login.jpg" alt="Login Image" class="login-image">
-    <form [formGroup]="formLogin" (ngSubmit)="sendFormLogin()">
-      <h2>Bienvenido</h2>
-
-
-      <div class="col-12 ">
-        <div class="form-container">
-          <div class="form-group">
-            <label class="form-label">Correo</label>
-            <input class="form-input" placeholder="Ingresa el correo" formControlName="email">
+<div class="wrapper-login" >
+  <div class="login-container">
+    <div class="login-form">
+      <h1>Comenzar sesión</h1>
+      <form class="grid" [formGroup]="formLogin" (ngSubmit)="sendFormLogin()">
+        <div class="col-12">
+          <div class="form-container">
+            <div class="form-group">
+              <label class="form-label"><em class="icon-user"></em> Correo</label>
+              <input class="form-input"  appValidateErrors type="text" placeholder="Ingrese su correo" formControlName="email">
+              <span class="form-line"></span>
+            </div>
           </div>
         </div>
-      </div>
-
-      <div class="col-12 ">
-        <div class="form-container">
-          <div class="form-group">
-            <label class="form-label">Contraseña</label>
-            <input class="form-input" placeholder="Ingresa la contraseña" formControlName="password">
+        <div class="col-12">
+          <div class="form-container">
+            <div class="form-group">
+              <label class="form-label"><em class="icon-padlock"></em> Contraseña</label>
+              <input class="form-input" type="password" appValidateErrors placeholder="Ingrese su contraseña" formControlName="password">
+              <span class="form-line"></span>
+            </div>
           </div>
         </div>
-      </div>
-      <a href="" class="forgot-password">Olvidaste tu contraseña?</a>
-      <button type="submit">Iniciar sesión</button>
-      <p>o continua con:</p>
-      <div class="social-login">
-        <button type="button" class="social-btn google">G</button>
-        <button type="button" class="social-btn facebook">f</button>
-        <button type="button" class="social-btn twitter">X</button>
-      </div>
-
-    </form>
+        <div class="content-btn-redirect-register">
+          <span class="login-btn-register" (click)="register()" type="submit">Crear una cuenta </span>
+        </div>
+        <button class="btn-general" type="submit">Ingresar</button>
+      </form>
+    </div>
+    <div class="login-image">
+      <img src="assets/images/auth/shop.gif" alt="Imagen de inicio de sesión">
+    </div>
   </div>
 </div>
