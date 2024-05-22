@@ -1,0 +1,37 @@
+<div class="wrapper-home">
+
+  <div class="header">
+    <img ngSrc="assets/images/login.jpg" alt="" height="50" width="50">
+    <button class="btn-general" (click)="viewCard()">Agregar producto</button>
+  </div>
+
+  <div class="search-container">
+    <input type="text" (keyup.enter)="searchProducts()" [(ngModel)]="searchTerm" placeholder="Buscar...">
+    <button type="submit"  (click)="searchProducts()">Buscar</button>
+  </div>
+
+
+  <div class="product-list">
+
+    <div *ngFor="let product of products"  (click)="productDetail(product.id)" class="product">
+      <div class="images">
+        <img [src]="product.images[0]" />
+      </div>
+      <div class="info-product">
+        <h2 class="title">{{ product.title | titlecase }}</h2>
+        <p class="price">$ {{ product.price }}</p>
+      </div>
+
+
+    </div>
+  </div>
+
+
+  @if (handlerMenu()){
+    <app-edit-product
+      (addedProduct)="addedProduct($event)"
+    />
+  }
+
+
+</div>

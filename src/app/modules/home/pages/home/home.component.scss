@@ -1,0 +1,111 @@
+.wrapper-home{
+  height: 100vh;
+  width: 100%;
+  overflow: auto;
+  background-color: #d5d8e7;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100vw;
+    height: 60px;
+    margin-bottom: 20px;
+    background-color: #776258;
+
+    img{
+      margin-left: 10px;
+      background-color: white;
+      border-radius: 50%;
+    }
+
+    .btn-general{
+      width: 150px;
+      margin: 0 10px 0 0;
+    }
+  }
+
+  .search-container {
+    margin: 0 auto;
+    width: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 24px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+  }
+  .search-container input[type="text"] {
+    border: none;
+    outline: none;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 24px 0 0 24px;
+    width: 600px;
+  }
+  .search-container button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    border-radius: 0 24px 24px 0;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  .search-container button:hover {
+    background-color: #45a049;
+  }
+
+.product-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+
+  .product {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    background: linear-gradient(to bottom, #f0f0f0 0%, #ffffff 50%);
+
+    &:hover{
+      cursor: pointer;
+      transform: translateY(-5px);
+    }
+
+    .info-product{
+      width: calc(100% - 40px);
+      padding: 20px;
+
+      .title {
+        font-size: 1.5rem;
+        margin-top: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .price {
+        color: green;
+        margin: 10px 0;
+      }
+    }
+
+    .images {
+      img {
+        width: 100%;
+        height: 300px;
+        margin-bottom: 10px;
+        object-fit: contain;
+        border-top-left-radius: 6px ;
+        border-top-right-radius: 6px ;
+      }
+    }
+  }
+}
+}
