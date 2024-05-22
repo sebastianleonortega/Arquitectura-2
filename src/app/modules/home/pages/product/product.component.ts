@@ -4,7 +4,7 @@ import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {NgForOf, NgIf, NgOptimizedImage, TitleCasePipe} from "@angular/common";
 import {EditProductComponent} from "../edit-product/edit-product.component";
 import {Product} from "../../interfaces/product";
-import {MAT_DIALOG_DATA, MatDialogModule} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogModule} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-product',
@@ -34,6 +34,7 @@ export class ProductComponent implements OnInit{
     private _home: HomeService,
     private _route: ActivatedRoute,
     private _router: Router,
+    private _dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
     this.productId = data;
@@ -50,6 +51,10 @@ export class ProductComponent implements OnInit{
       { id: 4, image: 'https://img2.wallspic.com/crops/5/4/2/1/41245/41245-extincion-juego_de_pc-2048x1079.jpg' },
     ]
     console.log(this.carouselData)
+  };
+
+  closeModal(){
+    this._dialog.closeAll();
   }
 
   getProductById(id : any){

@@ -6,7 +6,7 @@ import {EditProductComponent} from "../edit-product/edit-product.component";
 import {Product} from "../../interfaces/product";
 import {AlertService} from "../../../../core/services/alert.service";
 import {FormsModule} from "@angular/forms";
-import {MatDialog, MatDialogModule} from "@angular/material/dialog";
+import {MatDialog} from "@angular/material/dialog";
 import {ProductComponent} from "../product/product.component";
 
 @Component({
@@ -18,7 +18,6 @@ import {ProductComponent} from "../product/product.component";
     EditProductComponent,
     NgOptimizedImage,
     FormsModule,
-    MatDialogModule,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
@@ -37,7 +36,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.handlerMenu.update((): boolean => false) //cambiar a false cuando acabe los estilos
     this.getProduct();
   }
 
@@ -57,8 +55,6 @@ export class HomeComponent implements OnInit {
     this._home.getProduct().subscribe({
       next: (data) => {
         this.products = data;
-
-
         data.forEach(
           (item: any) => {
             if (item.images[0].startsWith('["')) {
@@ -70,15 +66,11 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  viewCard() {
-    this.handlerMenu.update((): boolean => !this.handlerMenu())
-  }
-
   productDetail(id: number){
 
     this._dialog.open(ProductComponent, {
       width: '1000px',
-      height: '800px',
+      height: '440px',
       data: id
     })
   }

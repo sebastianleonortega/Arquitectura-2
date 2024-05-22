@@ -22,10 +22,6 @@ export const appConfig: ApplicationConfig = {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    },
-    {
-      provide: MAT_DIALOG_DEFAULT_OPTIONS,
-      useValue: {hasBackdrop: false}
     }
   ]
 };

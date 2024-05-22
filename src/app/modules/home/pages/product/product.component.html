@@ -1,13 +1,14 @@
-<div class="header">
-  <img routerLink="/home" ngSrc="assets/images/login.jpg" alt="" height="50" width="50">
-</div>
+<!--<div class="header">-->
+<!--  <img routerLink="/home" ngSrc="assets/images/login.jpg" alt="" height="50" width="50">-->
+<!--</div>-->
 
-<div class="wrapper-detail-product">
+
   <div class="product-detail">
+    <span class="close-modal icon-close" (click)="closeModal()"></span>
 
     <div class="carousel-container" (swipeleft)="nextItem()" (swiperight)="prevItem()">
       <div class="carousel-list" *ngFor="let item of carouselData; let i = index">
-        <img class="carousel-item" *ngIf="i === carouselData" [src]="item.image" alt="Imagen {{item.id}}">
+        <img class="carousel-item" *ngIf="i === currentIndex" [src]="item.image" alt="Imagen {{item.id}}">
       </div>
       <button class="prev-button" (click)="prevItem()"><em class="icon-arrow-left"></em></button>
       <button class="next-button" (click)="nextItem()"><em class="icon-arrow-right"></em></button>
@@ -15,9 +16,8 @@
 
 
     <div class="content-info">
-      <h1>{{ product?.title | titlecase}} <em class="icon-trash" (click)="deleteProduct()"></em></h1>
+      <h1>{{ product?.title | titlecase}} </h1>
       <p class="description">{{ product?.description }}</p>
       <p class="price">$ {{ product?.price }}</p>
     </div>
   </div>
-</div>
