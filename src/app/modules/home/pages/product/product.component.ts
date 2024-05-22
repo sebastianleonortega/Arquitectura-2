@@ -38,7 +38,6 @@ export class ProductComponent implements OnInit{
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
     this.productId = data;
-    console.log(this.productId)
   }
 
   ngOnInit() {
@@ -67,14 +66,6 @@ export class ProductComponent implements OnInit{
         }
         this.product = data;
         this.parsedImages =  JSON.parse(data.images);
-      }
-    })
-  }
-
-  deleteProduct(){
-    this._home.deleteProduct(this.productId).subscribe({
-      next: () => {
-        this._router.navigateByUrl('/home').then();
       }
     })
   }

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output, WritableSignal} from '@angular/core';
+import {Component, EventEmitter, Inject, OnInit, Output, WritableSignal} from '@angular/core';
 import {HomeService} from "../../service/home.service";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
@@ -11,6 +11,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatIcon} from "@angular/material/icon";
 import {AlertService} from "../../../../core/services/alert.service";
 import {Category} from "../../interfaces/product";
+import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-edit-product',
@@ -32,7 +33,6 @@ import {Category} from "../../interfaces/product";
 })
 export class EditProductComponent implements OnInit {
 
-  handlerMenu: WritableSignal<boolean> = this._home.cardSignal;
 
   showTitle: boolean = false;
 
@@ -48,29 +48,19 @@ export class EditProductComponent implements OnInit {
   constructor(
     private _home: HomeService,
     private _route: ActivatedRoute,
-    private _alert: AlertService
+    private _alert: AlertService,
+    @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
+    this.productId = data;
   }
 
 
   ngOnInit() {
     this.initFormProduct();
-    this.getIdRoute();
+    this.getProductById(this.productId);
     this.getCategories();
   }
 
-  viewCard() {
-    this.handlerMenu.update((): boolean => false)
-  }
-
-  getIdRoute() {
-    this._route.paramMap.subscribe(params => {
-      this.productId = params.get('id');
-      if (this.productId != null) {
-        this.getProductById(this.productId);
-      }
-    })
-  }
 
   getProductById(id: any) {
     this._home.getProductById(id).subscribe({
@@ -130,7 +120,6 @@ export class EditProductComponent implements OnInit {
       if (this.productId != null) {
         this._home.updateProduct(this.productId, data).subscribe({
           next: (r) => {
-            this.viewCard();
             this.editProduct.emit(true)
             this._alert.success("producto editado")
           }
@@ -140,7 +129,6 @@ export class EditProductComponent implements OnInit {
           next: (r) => {
             this.addedProduct.emit(true)
             this._alert.success("producto agregado")
-            this.viewCard();
           }
         })
       }

@@ -138,8 +138,92 @@ ng-select.custom {
   100% { transform: translateX(0); }
 }
 
+//estilosd de la modal
 .cdk-overlay-container {
   background-color: rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(6px);
+}
 
+
+//****** Loader ******//
+.no-scroll {
+  overflow: hidden;
+  scroll-behavior: initial;
+}
+
+//Global styles for alerts
+
+//****** colors for alerts ******//
+$success-color: #3BC279;
+$success-color-light: #E7F9F1;
+$error-color: #FF040E;
+$error-color-light: #FAEDED;
+$warning-color: #FFBF01;
+$warning-color-light: #FFF8E3;
+$info-color: #37CCEA;
+$info-color-light: #D9F5FF;
+$reversed-color: #0909b6;
+
+$box-shadow-default: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+
+.toast-container {
+
+  .ngx-toastr {
+    width: 300px !important;
+    border-radius: 4px 4px 4px 4px !important;
+    box-shadow: $box-shadow-default !important;
+  }
+
+  .toast-close-button {
+    text-shadow: $box-shadow-default !important;
+  }
+
+  .toast-success {
+    border-left: 8px solid $success-color !important;
+    background-color: $success-color-light !important;
+    background-image: url("./assets/images/alerts/success.svg") !important;
+
+    .toast-message, .toast-title, .toast-close-button {
+      color: $success-color !important;
+    }
+  }
+
+  .toast-error {
+    border-left: 10px solid $error-color !important;
+    background-color: $error-color-light !important;
+    background-image: url("./assets/images/alerts/error.svg") !important;
+
+    .toast-message, .toast-title, .toast-close-button {
+      color: $error-color !important;
+    }
+
+  }
+
+  .toast-info {
+    border-left: 10px solid $info-color !important;
+    background-color: $info-color-light !important;
+    background-image: url("./assets/images/alerts/info.svg") !important;
+
+    .toast-message, .toast-title, .toast-close-button {
+      color: $info-color !important;
+    }
+
+    .toast-close-button {
+      color: $info-color !important;
+    }
+  }
+
+  .toast-warning {
+    border-left: 10px solid $warning-color !important;
+    background-color: $warning-color-light !important;
+    background-image: url("./assets/images/alerts/warning.svg") !important;
+
+    .toast-message, .toast-title, .toast-close-button {
+      color: $warning-color !important;
+    }
+
+    .toast-close-button {
+      color: $warning-color !important;
+    }
+  }
 }
