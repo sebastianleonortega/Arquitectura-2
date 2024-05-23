@@ -29,6 +29,14 @@
       margin-right: 10px;
       cursor: pointer;
       color: white;
+
+      &:first-child{
+        margin-left: 10px;
+        transition: all linear .25s;
+        &:hover{
+          transform: rotate(-90deg);
+        }
+      }
     }
   }
 

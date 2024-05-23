@@ -1,7 +1,7 @@
 import {Component, OnInit, WritableSignal} from '@angular/core';
 import {HomeService} from "../../service/home.service";
 import {CommonModule, NgOptimizedImage} from "@angular/common";
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {EditProductComponent} from "../edit-product/edit-product.component";
 import {Product} from "../../interfaces/product";
 import {AlertService} from "../../../../core/services/alert.service";
@@ -27,13 +27,14 @@ export class HomeComponent implements OnInit {
 
   handlerMenu: WritableSignal<boolean> = this._home.cardSignal;
   products: Product[] = [];
-  searchTerm : string = "";
+  searchTerm: string = "";
 
   constructor(
     private _home: HomeService,
     private _alert: AlertService,
     private _dialog: MatDialog,
-    private _loader: LoadingService
+    private _loader: LoadingService,
+    private _route: Router,
   ) {
   }
 
@@ -48,9 +49,9 @@ export class HomeComponent implements OnInit {
 
   searchProducts(): void {
     const text = this.searchTerm.toLowerCase();
-    if (text === ""){
+    if (text === "") {
       this.getProduct();
-    }else {
+    } else {
       this.products = this.products.filter(product =>
         product.title.toLowerCase().includes(text) ||
         product.description.toLowerCase().includes(text)
@@ -75,7 +76,7 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  productDetail(id: number){
+  productDetail(id: number) {
     this._dialog.open(ProductComponent, {
       width: '1000px',
       height: '440px',
@@ -87,6 +88,11 @@ export class HomeComponent implements OnInit {
     if (add) {
       this.getProduct();
     }
+  }
+
+  logOut() {
+    localStorage.clear();
+    this._route.navigateByUrl('/login')
   }
 
 }
