@@ -21,12 +21,9 @@ export class LoadingService {
   }
 
   public hide(): void {
-    setTimeout(()=> {
       this.renderer.removeClass(document.body, 'no-scroll');
       this.renderer.removeClass(document.documentElement, 'no-scroll');
       this.loading$.next(false)
-    },3000);
-
   }
 
 }

@@ -47,6 +47,10 @@ export class ProductComponent implements OnInit{
     this._dialog.closeAll();
   }
 
+  formatPrice(price: any): string {
+    return `$ ${Math.round(price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`;
+  }
+
   getProductById(id : any){
     this._home.getProductById(id).subscribe({
       next: (data) => {

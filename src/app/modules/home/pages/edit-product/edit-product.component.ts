@@ -12,6 +12,8 @@ import {MatIcon} from "@angular/material/icon";
 import {AlertService} from "../../../../core/services/alert.service";
 import {Category} from "../../interfaces/product";
 import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
+import {MessageErrorsDirective} from "../../../../shared/directives/field-errors/directive/message-errors.directive";
+import {LoadingService} from "../../../../core/services/loading.service";
 
 @Component({
   selector: 'app-edit-product',
@@ -27,6 +29,7 @@ import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
     MatSelectModule,
     MatIcon,
     NgIf,
+    MessageErrorsDirective,
   ],
   templateUrl: './edit-product.component.html',
   styleUrl: './edit-product.component.scss'
@@ -49,6 +52,7 @@ export class EditProductComponent implements OnInit {
     private _home: HomeService,
     private _alert: AlertService,
     private _dialog: MatDialog,
+    private _loader: LoadingService,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
     this.productId = data;
@@ -65,16 +69,20 @@ export class EditProductComponent implements OnInit {
   }
 
   getProductById(id: any) {
+    this._loader.show();
     this._home.getProductById(id).subscribe({
       next: (data) => {
         this.setDataProduct(data);
-        console.log(data)
-
+        this._loader.hide();
         if (data.images[0].startsWith('["')) {
           this.images = JSON.parse(data.images);
         }
         this.showTitle = true;
-      }
+      }, error: () => {
+        this._alert.error("error al obtener producto")
+      this._loader.show();
+
+    }
     })
   }
 
@@ -113,6 +121,7 @@ export class EditProductComponent implements OnInit {
 
   sendFormProduct() {
     if (this.formProduct.valid) {
+      this._loader.show();
       const data = {
         title: this.formProduct.get("title")?.value,
         price: this.formProduct.get("price")?.value,
@@ -126,6 +135,10 @@ export class EditProductComponent implements OnInit {
             this.editProduct.emit(true)
             this._alert.success("producto editado")
             this.closeModal();
+            this._loader.hide()
+          }, error: () => {
+            this._alert.error("error al actualizar el producto");
+            this._loader.hide();
           }
         })
       } else {
@@ -134,6 +147,9 @@ export class EditProductComponent implements OnInit {
             this.addedProduct.emit(true)
             this._alert.success("producto agregado")
             this.closeModal();
+          }, error: () => {
+            this._alert.error("error al guardar el producto");
+            this._loader.hide();
           }
         })
       }
@@ -156,7 +172,6 @@ export class EditProductComponent implements OnInit {
 
   deleteImage(position: number){
     this.images.splice(position, 1);
-    this._alert.success("Producto eliminado")
   }
 
   closeModal(){
