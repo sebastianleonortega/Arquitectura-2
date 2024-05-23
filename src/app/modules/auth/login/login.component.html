@@ -1,34 +1,42 @@
-<div class="wrapper-login" >
-  <div class="login-container">
-    <div class="login-form">
-      <h1>Comenzar sesión</h1>
-      <form class="grid" [formGroup]="formLogin" (ngSubmit)="sendFormLogin()">
-        <div class="col-12">
-          <div class="form-container">
-            <div class="form-group">
-              <label class="form-label"><em class="icon-user"></em> Correo</label>
-              <input class="form-input"  appValidateErrors type="text" placeholder="Ingrese su correo" formControlName="email">
-              <span class="form-line"></span>
+<div class="wrapper-main-login">
+  <img src="assets/images/fondo1.jpg" alt="">
+  <div class="main-content-login">
+    <div class="content-login">
+      <div class="content-login-left">
+        <img src="assets/images/login.png" alt="login">
+      </div>
+      <div class="content-login-right">
+        <div class="login-right--top">
+          <button>Inicio</button>
+          <button (click)="register()">Registro</button>
+        </div>
+        <div class="login-right--center">
+          <form [formGroup]="formLogin">
+            <div class="form-container">
+              <div class="form-group">
+                <label class="form-label"><em class="icon-user"></em> Correo</label>
+                <input class="form-input" appValidateErrors type="text" placeholder="Ingrese su correo"
+                       formControlName="email">
+                <span class="form-line"></span>
+              </div>
             </div>
-          </div>
-        </div>
-        <div class="col-12">
-          <div class="form-container">
-            <div class="form-group">
-              <label class="form-label"><em class="icon-padlock"></em> Contraseña</label>
-              <input class="form-input" type="password" appValidateErrors placeholder="Ingrese su contraseña" formControlName="password">
-              <span class="form-line"></span>
+            <div class="form-container">
+              <div class="form-group">
+                <label class="form-label"><em class="icon-padlock"></em> Contraseña</label>
+                <input class="form-input" type="password" appValidateErrors placeholder="Ingrese su contraseña"
+                       formControlName="password">
+                <span class="form-line"></span>
+              </div>
             </div>
-          </div>
+            <div class="btn-login">
+              <span type="submit" (click)="sendFormLogin()">Ingresar</span>
+            </div>
+          </form>
         </div>
-        <div class="content-btn-redirect-register">
-          <span class="login-btn-register" (click)="register()" type="submit">Crear una cuenta </span>
+        <div class="login-right--bottom">
+          <span>Ingresa a tu cuenta o registrate si no tienes una para que disfrutes de nuestra tienda</span>
         </div>
-        <button class="btn-general" type="submit">Ingresar</button>
-      </form>
-    </div>
-    <div class="login-image">
-      <img src="assets/images/auth/shop.gif" alt="Imagen de inicio de sesión">
+      </div>
     </div>
   </div>
 </div>

@@ -40,11 +40,12 @@ export class LoginComponent implements OnInit {
   }
 
   sendFormLogin(){
+    console.log('ASDASD')
     const data = {
-      // email: this.formLogin.get("email")?.value,
-      // password: this.formLogin.get("password")?.value,
-      email: "john@mail.com",
-      password: "changeme",
+      email: this.formLogin.get("email")?.value,
+      password: this.formLogin.get("password")?.value,
+      // email: "john@mail.com",
+      // password: "changeme",
     }
     this._auth.login(data).subscribe({
       next: (r) => {

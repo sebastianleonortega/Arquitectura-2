@@ -16,4 +16,8 @@ export class AuthService {
   public login(data: any): Observable<any> {
     return this._http.post<any>(this.api, data)
   }
+
+  public register(data: any): Observable<any> {
+    return this._http.post<any>('https://api.escuelajs.co/api/v1/users/', data)
+  }
 }
