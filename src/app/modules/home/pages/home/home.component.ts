@@ -8,6 +8,7 @@ import {AlertService} from "../../../../core/services/alert.service";
 import {FormsModule} from "@angular/forms";
 import {MatDialog} from "@angular/material/dialog";
 import {ProductComponent} from "../product/product.component";
+import {LoadingService} from "../../../../core/services/loading.service";
 
 @Component({
   selector: 'app-home',
@@ -32,10 +33,12 @@ export class HomeComponent implements OnInit {
     private _home: HomeService,
     private _alert: AlertService,
     private _dialog: MatDialog,
+    private _loader: LoadingService
   ) {
   }
 
   ngOnInit() {
+    // this._loader.show();
     this.getProduct();
   }
 
@@ -54,6 +57,8 @@ export class HomeComponent implements OnInit {
   getProduct() {
     this._home.getProduct().subscribe({
       next: (data) => {
+        this._loader.hide();
+
         this.products = data;
         data.forEach(
           (item: any) => {

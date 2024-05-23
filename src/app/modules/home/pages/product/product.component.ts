@@ -32,25 +32,15 @@ export class ProductComponent implements OnInit{
 
   constructor(
     private _home: HomeService,
-    private _route: ActivatedRoute,
-    private _router: Router,
     private _dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
     this.productId = data;
-    console.log(this.productId)
   }
 
   ngOnInit() {
     this.startAutoPlay();
     this.getProductById(this.productId);
-    this.carouselData = [
-      { id: 1, image: 'https://wallpapers-clan.com/wp-content/uploads/2023/11/call-of-duty-warrior-with-weapon-red-desktop-wallpaper-preview.jpg' },
-      { id: 2, image: 'https://wallpapercrafter.com/desktop4/1151951-video-games-Ubisoft-collage-1080P.jpg' },
-      { id: 3, image: 'https://static.techspot.com/images2/news/bigimage/2020/12/2020-12-14-image-17.jpg' },
-      { id: 4, image: 'https://img2.wallspic.com/crops/5/4/2/1/41245/41245-extincion-juego_de_pc-2048x1079.jpg' },
-    ]
-    console.log(this.carouselData)
   };
 
   closeModal(){
@@ -67,14 +57,12 @@ export class ProductComponent implements OnInit{
         }
         this.product = data;
         this.parsedImages =  JSON.parse(data.images);
-      }
-    })
-  }
 
-  deleteProduct(){
-    this._home.deleteProduct(this.productId).subscribe({
-      next: () => {
-        this._router.navigateByUrl('/home').then();
+        this.carouselData  = this.parsedImages.map((url, index) => ({
+          id: index + 1,
+          image: url
+        }));
+
       }
     })
   }

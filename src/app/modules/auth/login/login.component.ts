@@ -4,6 +4,7 @@ import {CommonModule} from "@angular/common";
 import {AuthService} from "../service/auth.service";
 import {Router} from "@angular/router";
 import {InputMaskDirective} from "../../../core/directives/input-mask.directive";
+import {StorageService} from "../../../core/services/storage.service";
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private _auth: AuthService,
-    private _route: Router
+    private _route: Router,
   ) {
   }
 
@@ -49,7 +50,7 @@ export class LoginComponent implements OnInit {
       next: (r) => {
         this._route.navigateByUrl('home').then();
         localStorage.setItem("access_token", r.access_token)
-        localStorage.setItem("refresh_token", r.refresh_token)
+        // localStorage.setItem("refresh_token", r.refresh_token)
       }
     })
   }
