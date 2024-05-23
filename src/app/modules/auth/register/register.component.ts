@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {AuthService} from "../service/auth.service";
 import {AlertService} from "../../../core/services/alert.service";
+import {LoadingService} from "../../../core/services/loading.service";
 
 @Component({
   selector: 'app-register',
@@ -21,7 +22,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private _route: Router,
     private _auth: AuthService,
-    private _alert: AlertService
+    private _alert: AlertService,
+    private _loader: LoadingService
   ) {
   }
 
@@ -44,6 +46,7 @@ export class RegisterComponent implements OnInit {
 
 
   sendFormRegister() {
+    this._loader.show();
     const data = {
       name: this.formRegister.get('name')?.value,
       email: this.formRegister.get('email')?.value,
@@ -53,10 +56,12 @@ export class RegisterComponent implements OnInit {
     this._auth.register(data).subscribe({
       next: (r) => {
         this._route.navigateByUrl('/login').then();
+        this._loader.hide();
         this._alert.success('Usuario registrado con exito');
       }, error: err => {
         console.log(err);
         this._route.navigateByUrl('/login').then();
+        this._loader.hide();
         this._alert.warning('Ocurrio un error al registrar el usuario');
       }
     })

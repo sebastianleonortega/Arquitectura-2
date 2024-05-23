@@ -7,6 +7,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {AlertService} from "../../../../core/services/alert.service";
 import {EditProductComponent} from "../edit-product/edit-product.component";
 import {LoadingService} from "../../../../core/services/loading.service";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-administration',
@@ -14,27 +15,30 @@ import {LoadingService} from "../../../../core/services/loading.service";
   imports: [
     NgForOf,
     DatePipe,
-    NgxPaginationModule
+    NgxPaginationModule,
+    RouterLink
   ],
   templateUrl: './administration.component.html',
   styleUrl: './administration.component.scss'
 })
-export class AdministrationComponent implements OnInit{
+export class AdministrationComponent implements OnInit {
   products: Product[] = [];
   page: number = 1;
 
   constructor(
-    private  _home: HomeService,
+    private _home: HomeService,
     private _dialog: MatDialog,
     private _alert: AlertService,
-    private _loader: LoadingService
+    private _loader: LoadingService,
   ) {
   }
+
   ngOnInit() {
     this.getProduct();
   }
 
-  addProduct(){
+
+  addProduct() {
     const dialogRef = this._dialog.open(EditProductComponent, {
       width: "800px",
       height: "600px",
@@ -47,7 +51,7 @@ export class AdministrationComponent implements OnInit{
     })
   }
 
-  editProduct(id: number ){
+  editProduct(id: number) {
     const dialogRef = this._dialog.open(EditProductComponent, {
       width: "800px",
       height: "600px",
@@ -62,7 +66,7 @@ export class AdministrationComponent implements OnInit{
 
   }
 
-  deleteProduct(id: number){
+  deleteProduct(id: number) {
     this._home.deleteProduct(id).subscribe({
       next: () => {
         this._alert.success("producto Eliminado")
