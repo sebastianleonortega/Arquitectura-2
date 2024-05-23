@@ -1,75 +1,82 @@
 <div class="card">
   <span class="close-modal icon-close"></span>
-  <div class="title">
-    <span *ngIf="!showTitle">Agregar producto</span>
-    <span *ngIf="showTitle">Editar producto</span>
+
+  <div class="content-form">
+
+    <div class="title">
+      <span *ngIf="!showTitle">Agregar producto</span>
+      <span *ngIf="showTitle">Editar producto</span>
+    </div>
+    <form [formGroup]=formProduct >
+
+      <div class="col-12 ">
+        <div class="form-container">
+          <div class="form-group">
+            <label class="form-label">Nombre</label>
+            <input class="form-input" placeholder="Ingresa el nombre" formControlName="title">
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 ">
+        <div class="form-container">
+          <div class="form-group">
+            <label class="form-label">Descripción</label>
+            <textarea class="custom-textarea" placeholder="Ingresa una descripción" formControlName="description"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 ">
+        <div class="form-container">
+          <div class="form-group">
+            <label class="form-label">Precio</label>
+            <input class="form-input" appInputMask="integer"  placeholder="Ingresa el precio" formControlName="price">
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="form-container">
+          <div class="form-group">
+            <label class="form-label"> Categoria</label>
+            <ng-select [items]="categories"
+                       bindValue="id"
+                       bindLabel="name"
+                       class="custom-two form-ng-select"
+                       formControlName="categoryId"
+                       placeholder="Seleccione una opción"
+                       [searchable]="false">
+            </ng-select>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 ">
+        <div class="form-container">
+          <div class="form-group">
+            <label class="form-label">Url de la imagen</label>
+            <button class="icon-check plus-icon"  (click)="pushImages()"></button>
+            <input class="form-input input-plus" placeholder="Ingrese la url de la imagen" formControlName="images" >
+          </div>
+        </div>
+      </div>
+
+      <button class="btn-general" (click)="sendFormProduct()">Enviar</button>
+    </form>
   </div>
-  <form [formGroup]=formProduct >
 
-    <div class="col-12 ">
-      <div class="form-container">
-        <div class="form-group">
-          <label class="form-label">Nombre</label>
-          <input class="form-input" placeholder="Ingresa el nombre" formControlName="title">
-        </div>
+
+  <div class="col-12 show-img">
+    @for (item of images; track item) {
+      <div class="content-img">
+        <em class="icon-trash icon-absolute" (click)="deleteImage($index)"></em>
+        <img ngSrc="{{item}}" alt="" width="260" height="250" >
       </div>
-    </div>
+    }
+  </div>
 
-    <div class="col-12 ">
-      <div class="form-container">
-        <div class="form-group">
-          <label class="form-label">Descripción</label>
-          <textarea class="custom-textarea" placeholder="Ingresa una descripción" formControlName="description"></textarea>
-        </div>
-      </div>
-    </div>
 
-    <div class="col-12 ">
-      <div class="form-container">
-        <div class="form-group">
-          <label class="form-label">Precio</label>
-          <input class="form-input" appInputMask="integer"  placeholder="Ingresa el precio" formControlName="price">
-        </div>
-      </div>
-    </div>
-
-    <div class="col-12">
-      <div class="form-container">
-        <div class="form-group">
-          <label class="form-label"> Categoria</label>
-          <ng-select [items]="categories"
-                     bindValue="id"
-                     bindLabel="name"
-                     class="custom-two form-ng-select"
-                     formControlName="categoryId"
-                     placeholder="Seleccione una opción"
-                     [searchable]="false">
-          </ng-select>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-12 ">
-      <div class="form-container">
-        <div class="form-group">
-          <label class="form-label">Url de la imagen</label>
-          <button class="icon-check plus-icon"  (click)="pushImages()"></button>
-          <input class="form-input input-plus" placeholder="Ingrese la url de la imagen" formControlName="images" >
-        </div>
-      </div>
-    </div>
-
-    <div class="col-12 show-img">
-      @for (item of images; track item) {
-        <div class="content-img">
-          <em class="icon-trash icon-absolute" (click)="deleteImage($index)"></em>
-          <img ngSrc="{{item}}" alt="" width="150" height="100" >
-        </div>
-      }
-    </div>
-
-    <button class="btn-general" (click)="sendFormProduct()">Enviar</button>
-  </form>
 
 </div>
 

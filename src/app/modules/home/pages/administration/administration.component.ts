@@ -32,11 +32,30 @@ export class AdministrationComponent implements OnInit{
     this.getProduct();
   }
 
+  addProduct(){
+    const dialogRef = this._dialog.open(EditProductComponent, {
+      width: "800px",
+      height: "600px",
+    })
+
+    dialogRef.afterClosed().subscribe({
+      next: () => {
+        this.getProduct();
+      }
+    })
+  }
+
   editProduct(id: number ){
-    this._dialog.open(EditProductComponent, {
-      width: "500px",
-      height: "500px",
+    const dialogRef = this._dialog.open(EditProductComponent, {
+      width: "800px",
+      height: "600px",
       data: id
+    })
+
+    dialogRef.afterClosed().subscribe({
+      next: () => {
+        this.getProduct();
+      }
     })
 
   }

@@ -11,7 +11,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatIcon} from "@angular/material/icon";
 import {AlertService} from "../../../../core/services/alert.service";
 import {Category} from "../../interfaces/product";
-import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-edit-product',
@@ -47,8 +47,8 @@ export class EditProductComponent implements OnInit {
 
   constructor(
     private _home: HomeService,
-    private _route: ActivatedRoute,
     private _alert: AlertService,
+    private _dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
     this.productId = data;
@@ -57,10 +57,12 @@ export class EditProductComponent implements OnInit {
 
   ngOnInit() {
     this.initFormProduct();
-    this.getProductById(this.productId);
     this.getCategories();
-  }
 
+    if (this.productId){
+      this.getProductById(this.productId);
+    }
+  }
 
   getProductById(id: any) {
     this._home.getProductById(id).subscribe({
@@ -100,6 +102,7 @@ export class EditProductComponent implements OnInit {
       images: new FormControl('', ),
     })
   }
+
   imageURLValidator(control: FormControl): { [key: string]: boolean } | null {
     const urlPattern = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?.(jpg|jpeg|png|gif|bmp)$/i;
     if (!control.value || !urlPattern.test(control.value)) {
@@ -122,6 +125,7 @@ export class EditProductComponent implements OnInit {
           next: (r) => {
             this.editProduct.emit(true)
             this._alert.success("producto editado")
+            this.closeModal();
           }
         })
       } else {
@@ -129,6 +133,7 @@ export class EditProductComponent implements OnInit {
           next: (r) => {
             this.addedProduct.emit(true)
             this._alert.success("producto agregado")
+            this.closeModal();
           }
         })
       }
@@ -136,7 +141,6 @@ export class EditProductComponent implements OnInit {
       this._alert.warning("Faltan datos en el formulario")
     }
   }
-
 
 
   pushImages(){
@@ -153,7 +157,10 @@ export class EditProductComponent implements OnInit {
   deleteImage(position: number){
     this.images.splice(position, 1);
     this._alert.success("Producto eliminado")
+  }
 
+  closeModal(){
+    this._dialog.closeAll();
   }
 
 }
