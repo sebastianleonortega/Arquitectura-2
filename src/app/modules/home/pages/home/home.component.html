@@ -7,27 +7,45 @@
 
   <div class="search-container">
     <div class="content-search">
-      <em class="icon-search"  (click)="searchProducts()"></em>
+      <em class="icon-search" (click)="searchProducts()"></em>
       <input type="text" (keyup.enter)="searchProducts()" [(ngModel)]="searchTerm" placeholder="Buscar...">
     </div>
   </div>
 
 
   <div class="product-list">
-    <div class="product" *ngFor="let product of products"  (click)="productDetail(product.id)" >
-      <div class="images">
-        <em class="icon-heart"></em>
-        <img [src]="product.images[0]" />
+    <div class="card" *ngFor="let product of products">
+      <div class="profile-pic">
+        <img [src]="product.images[0]" alt="{{product.title}}"/>
       </div>
-      <div class="info-product">
-        <span class="title">{{ product.title | titlecase }}</span>
-        <p class="price">$ {{ product.price }}</p>
+      <div class="details">
+        <div class="content">
+          <h2>{{ product.title }}</h2>
+          <p class="tag">{{ product.category.name }}</p>
+          <p class="about">{{ product.description }}</p>
+        </div>
+        <div class="buttons">
+          <div class="price">
+            <span>${{ product.price }}</span>
+          </div>
+          <a (click)="productDetail(product.id)" class="link">Detail</a>
+        </div>
       </div>
     </div>
   </div>
 
+  <!--    <div class="product" *ngFor="let product of products" (click)="productDetail(product.id)">-->
+  <!--      <div class="images">-->
+  <!--        <em class="icon-heart"></em>-->
+  <!--        <img [src]="product.images[0]"/>-->
+  <!--      </div>-->
+  <!--      <div class="info-product">-->
+  <!--        <span class="title">{{ product.title | titlecase }}</span>-->
+  <!--        <p class="price">$ {{ product.price }}</p>-->
+  <!--      </div>-->
+  <!--    </div>-->
 
-  @if (handlerMenu()){
+  @if (handlerMenu()) {
     <app-edit-product
       (addedProduct)="addedProduct($event)"
     />
