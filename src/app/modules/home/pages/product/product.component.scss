@@ -22,7 +22,6 @@
     justify-content: center;
     align-items: center;
     background-color: #fff;
-    padding: 20px;
 
     .close-modal {
       position: absolute;
@@ -40,38 +39,56 @@
 
     .content-info{
       display: flex;
-      justify-content: center;
       flex-direction: column;
       width: 50%;
-      height: 100%;
       padding: 20px;
 
-      h1 {
-        font-size: 2rem;
-        margin-bottom: 10px;
+      .content-info-data{
+        height: 350px;
+        overflow: auto;
 
-        em{
-          font-size: 22px;
-          cursor: pointer;
+        h1 {
+          font-size: 2rem;
+          margin-bottom: 10px;
+
+          em{
+            font-size: 22px;
+            cursor: pointer;
+          }
         }
-      }
 
-      .price {
-        font-size: 1.5rem;
-        color: #27ae60;
-        margin-bottom: 20px;
-      }
+        .price {
+          font-size: 1.5rem;
+          color: #27ae60;
+          margin-bottom: 20px;
+        }
 
-      .description {
-        font-size: 1rem;
-        color: #333;
-        margin-bottom: 20px;
+        .description {
+          font-size: 1rem;
+          color: #333;
+          margin-bottom: 20px;
+        }
       }
 
       .payment-img{
         align-items: center;
         width: 80%;
         margin: 0 auto;
+      }
+
+      .bnt-payment{
+        margin: 0 auto;
+        width: 80%;
+        display: flex;
+        gap: 20px;
+
+        button{
+          &:last-child{
+            background-color: #5a5a5a;
+          }
+        }
+
+
       }
     }
   }
@@ -83,6 +100,7 @@
   height: 400px;
   position: relative;
   overflow: hidden;
+  padding: 20px;
 
   .carousel-list {
     display: flex;

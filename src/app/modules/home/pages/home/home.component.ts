@@ -42,6 +42,10 @@ export class HomeComponent implements OnInit {
     this.getProduct();
   }
 
+  formatPrice(price: number): string {
+    return `$ ${Math.round(price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`;
+  }
+
   searchProducts(): void {
     const text = this.searchTerm.toLowerCase();
     if (text === ""){
@@ -57,7 +61,7 @@ export class HomeComponent implements OnInit {
   getProduct() {
     this._home.getProduct().subscribe({
       next: (data) => {
-        this._loader.hide();
+        // this._loader.hide();
 
         this.products = data;
         data.forEach(
@@ -72,7 +76,6 @@ export class HomeComponent implements OnInit {
   }
 
   productDetail(id: number){
-
     this._dialog.open(ProductComponent, {
       width: '1000px',
       height: '440px',

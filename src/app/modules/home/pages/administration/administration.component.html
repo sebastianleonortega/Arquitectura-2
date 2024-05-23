@@ -1,12 +1,20 @@
 <div class="wrapper-admin">
   <div class="bar">
-    a
+    <div class="images">
+      <img src="assets/images/logo-1.png" alt="">
+    </div>
+    <div class="content-options">
+      <span>Productos</span>
+      <span>Categoria</span>
+    </div>
   </div>
   <div class="content-admin">
     <div class="header-table">
       <button class="btn-general" (click)="addProduct()">Agregar producto</button>
     </div>
+
     <div class="table-container">
+
       <table class="customers-table">
         <thead>
         <tr>
@@ -27,15 +35,19 @@
           </td>
           <td>{{product.title}}</td>
           <td>${{product.price}}</td>
-          <td><img [src]="product.images" alt="{{product.title}}" class="avatar"></td>
+          <td><img [src]="product.images" alt="" class="avatar"></td>
           <td><span >{{product.category.name}}</span></td>
           <td>{{product.creationAt | date: 'dd/MM/yyyy - hh:mm a'}}</td>
           <td>{{product.updatedAt | date: 'dd/MM/yyyy - hh:mm a'}}</td>
         </tr>
         </tbody>
       </table>
-      <pagination-controls (pageChange)="page = $event"></pagination-controls>
+
+      <div class="table-pagination">
+        <pagination-controls (pageChange)="page = $event"></pagination-controls>
+      </div>
     </div>
+
   </div>
 
 </div>

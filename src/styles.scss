@@ -49,6 +49,7 @@
       gap: 2px;
       font-size: 14px;
       pointer-events: none;
+      color: #776258;
     }
 
     .form-input {
@@ -59,7 +60,18 @@
       font-size: 16px;
       outline: none;
       border: none;
-      border-bottom: 1px solid red;
+      border-bottom: 1px solid #dacfcf;
+    }
+
+    .form-input-2 {
+        outline: none;
+        height: 120px;
+        padding: 6px;
+        font-size: 16px;
+        border-radius: 6px;
+        border: 1px solid #dccece;
+        resize: none;
+
     }
 
     .form-line {
@@ -226,4 +238,24 @@ $box-shadow-default: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
       color: $warning-color !important;
     }
   }
+}
+
+//****** error messages ******//
+.form-error {
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  display: inline-block;
+  color: $error-color;
+  margin: 2px 0 0 4px;
+  font-weight: 400;
+  height: 8px;
+}
+
+.input-error {
+  border-bottom: 2px solid $error-color !important;
+}
+
+.input-error ~ .form-line {
+  background: $error-color !important;
 }

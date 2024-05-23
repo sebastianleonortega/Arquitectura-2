@@ -6,6 +6,7 @@ import {NgxPaginationModule} from "ngx-pagination";
 import {MatDialog} from "@angular/material/dialog";
 import {AlertService} from "../../../../core/services/alert.service";
 import {EditProductComponent} from "../edit-product/edit-product.component";
+import {LoadingService} from "../../../../core/services/loading.service";
 
 @Component({
   selector: 'app-administration',
@@ -26,6 +27,7 @@ export class AdministrationComponent implements OnInit{
     private  _home: HomeService,
     private _dialog: MatDialog,
     private _alert: AlertService,
+    private _loader: LoadingService
   ) {
   }
   ngOnInit() {

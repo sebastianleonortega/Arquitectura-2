@@ -4,7 +4,9 @@ import {CommonModule} from "@angular/common";
 import {AuthService} from "../service/auth.service";
 import {Router} from "@angular/router";
 import {InputMaskDirective} from "../../../core/directives/input-mask.directive";
-import {StorageService} from "../../../core/services/storage.service";
+import {MessageErrorsDirective} from "../../../shared/directives/field-errors/directive/message-errors.directive";
+import {LoadingService} from "../../../core/services/loading.service";
+import {AlertService} from "../../../core/services/alert.service";
 
 @Component({
   selector: 'app-login',
@@ -14,6 +16,7 @@ import {StorageService} from "../../../core/services/storage.service";
     FormsModule,
     CommonModule,
     InputMaskDirective,
+    MessageErrorsDirective
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
@@ -25,6 +28,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private _auth: AuthService,
     private _route: Router,
+    private _loader: LoadingService,
+    private _alert: AlertService
   ) {
   }
 
@@ -32,15 +37,18 @@ export class LoginComponent implements OnInit {
     this.initFormLogin();
   }
 
-  initFormLogin() {
+  initFormLogin(){
     this.formLogin = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.min(4)]),
       password: new FormControl('', [Validators.required, Validators.min(4)])
     })
   }
 
-  sendFormLogin() {
-    console.log('ASDASD')
+  sendFormLogin(){
+    if (this.formLogin.valid){
+      this._loader.show();
+
+
     const data = {
       email: this.formLogin.get("email")?.value,
       password: this.formLogin.get("password")?.value,
@@ -51,9 +59,17 @@ export class LoginComponent implements OnInit {
       next: (r) => {
         this._route.navigateByUrl('home').then();
         localStorage.setItem("access_token", r.access_token)
-        // localStorage.setItem("refresh_token", r.refresh_token)
+        this._loader.hide();
+
+      }, error: () =>{
+        this._loader.hide();
+        this._alert.error("credenciales icorrectas")
+
       }
     })
+  }else {
+      this._alert.warning("formulario no valido")
+    }
   }
 
   register() {

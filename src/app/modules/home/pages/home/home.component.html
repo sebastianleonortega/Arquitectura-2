@@ -16,34 +16,24 @@
   <div class="product-list">
     <div class="card" *ngFor="let product of products">
       <div class="profile-pic">
+        <em class="icon-heart"></em>
         <img [src]="product.images[0]" alt="{{product.title}}"/>
       </div>
       <div class="details">
         <div class="content">
-          <h2>{{ product.title }}</h2>
+          <h2>{{ product.title | titlecase }}</h2>
           <p class="tag">{{ product.category.name }}</p>
           <p class="about">{{ product.description }}</p>
         </div>
         <div class="buttons">
           <div class="price">
-            <span>${{ product.price }}</span>
+            <span> {{ formatPrice(product.price) }}</span>
           </div>
-          <a (click)="productDetail(product.id)" class="link">Detail</a>
+          <a (click)="productDetail(product.id)" class="link"><em class="icon-eye"></em></a>
         </div>
       </div>
     </div>
   </div>
-
-  <!--    <div class="product" *ngFor="let product of products" (click)="productDetail(product.id)">-->
-  <!--      <div class="images">-->
-  <!--        <em class="icon-heart"></em>-->
-  <!--        <img [src]="product.images[0]"/>-->
-  <!--      </div>-->
-  <!--      <div class="info-product">-->
-  <!--        <span class="title">{{ product.title | titlecase }}</span>-->
-  <!--        <p class="price">$ {{ product.price }}</p>-->
-  <!--      </div>-->
-  <!--    </div>-->
 
   @if (handlerMenu()) {
     <app-edit-product
