@@ -146,6 +146,7 @@ export class EditProductComponent implements OnInit {
           next: (r) => {
             this.addedProduct.emit(true)
             this._alert.success("producto agregado")
+            this._loader.hide();
             this.closeModal();
           }, error: () => {
             this._alert.error("error al guardar el producto");
