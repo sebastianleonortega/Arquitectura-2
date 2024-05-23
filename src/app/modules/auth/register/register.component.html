@@ -1,94 +1,50 @@
-<div class="wrapper-register">
-  <div class="register-container">
-    <div class="register-image">
-      <img src="assets/images/auth/register.jpg" alt="Imagen de inicio de sesión">
-    </div>
-    <div class="register-form">
-      <h1>Registrate</h1>
-      <form  class="grid" >
-        <div class="col-12">
-          <h4>Datos de la persona</h4>
+<div class="wrapper-main-register">
+  <img src="assets/images/fondo1.jpg" alt="">
+  <div class="main-content-login">
+    <div class="content-login">
+      <div class="content-login-left">
+        <img src="assets/images/login.png" alt="login">
+      </div>
+      <div class="content-login-right">
+        <div class="login-right--top">
+          <button (click)="login()">Inicio</button>
+          <button>Registro</button>
         </div>
-        <div class="col-6">
-          <div class="form-container">
-            <div class="form-group">
-              <label class="form-label"><em class="icon-user"></em> Nombres</label>
-              <input class="form-input" appInputMask="words" appValidateErrors type="text" placeholder="" formControlName="person_name">
-              <span class="form-line"></span>
+        <div class="login-right--center">
+          <form [formGroup]="formRegister">
+            <div class="form-container">
+              <div class="form-group">
+                <label class="form-label"><em class="icon-user"></em> Nombre</label>
+                <input class="form-input" appValidateErrors type="text" placeholder="Ingrese su correo"
+                       formControlName="name">
+                <span class="form-line"></span>
+              </div>
             </div>
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="form-container">
-            <div class="form-group">
-              <label class="form-label"><em class="icon-user"></em> Apellidos</label>
-              <input class="form-input" appInputMask="words" appValidateErrors type="text" placeholder="" formControlName="person_last_name">
-              <span class="form-line"></span>
+            <div class="form-container">
+              <div class="form-group">
+                <label class="form-label"><em class="icon-user"></em> Correo</label>
+                <input class="form-input" appValidateErrors type="text" placeholder="Ingrese su correo"
+                       formControlName="email">
+                <span class="form-line"></span>
+              </div>
             </div>
-          </div>
-        </div>
-        <div class="col-12 md:col-6 lg:col-6">
-          <div class="form-container">
-            <div class="form-group">
-              <label class="form-label"><em class="icon-id-card"></em> Documento</label>
-              <input class="form-input" appInputMask="integer" appValidateErrors type="text" placeholder="" formControlName="person_document">
-              <span class="form-line"></span>
+            <div class="form-container">
+              <div class="form-group">
+                <label class="form-label"><em class="icon-padlock"></em> Contraseña</label>
+                <input class="form-input" type="password" appValidateErrors placeholder="Ingrese su contraseña"
+                       formControlName="password">
+                <span class="form-line"></span>
+              </div>
             </div>
-          </div>
-        </div>
-        <div class="col-12 md:col-6 lg:col-6">
-          <div class="form-container">
-            <div class="form-group">
-              <label class="form-label"><em class="icon-phone"></em> Teléfono</label>
-              <input class="form-input" appInputMask="integer" appValidateErrors type="text" placeholder="" formControlName="person_phone">
-              <span class="form-line"></span>
+            <div class="btn-login">
+              <span type="submit" (click)="sendFormRegister()">Registrate</span>
             </div>
-          </div>
+          </form>
         </div>
-        <div class="col-12 md:col-6 lg:col-6">
-          <div class="form-container">
-            <div class="form-group">
-              <label class="form-label"><em class="icon-direction"></em> Dirección</label>
-              <input class="form-input" appInputMask="words" appValidateErrors type="text" placeholder="" formControlName="person_address">
-              <span class="form-line"></span>
-            </div>
-          </div>
+        <div class="login-right--bottom">
+          <span>Completa el registro de tu cuenta para disfrutar de nuestra tienda</span>
         </div>
-        <div class="col-12 md:col-6 lg:col-6 ">
-          <div class="form-container">
-            <div class="form-group">
-              <label class="form-label"><em class="icon-envelope"></em> Correo</label>
-              <input class="form-input" appInputMask="email" appValidateErrors type="text" placeholder="" formControlName="person_email">
-              <span class="form-line"></span>
-            </div>
-          </div>
-        </div>
-        <div class="col-12">
-          <h4>Datos de acceso</h4>
-        </div>
-        <div class="col-12 md:col-6 lg:col-6">
-          <div class="form-container">
-            <div class="form-group">
-              <label class="form-label"><em class="icon-user"></em> Usuario</label>
-              <input class="form-input" appInputMask="alphaNumeric" appValidateErrors type="text" placeholder="" formControlName="user_name">
-              <span class="form-line"></span>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 md:col-6 lg:col-6">
-          <div class="form-container">
-            <div class="form-group">
-              <label class="form-label"><em class="icon-padlock"></em> Contraseña</label>
-              <input class="form-input" type="password" appValidateErrors placeholder="" formControlName="password">
-              <span class="form-line"></span>
-            </div>
-          </div>
-        </div>
-        <div class="content-btn-redirect-login">
-          <span type="submit">¿Ya tienes una cuenta? <span (click)="goBack()" class="login-btn-register">inicia sesión</span></span>
-        </div>
-        <button class="btn-general" type="submit">Registrate</button>
-      </form>
+      </div>
     </div>
   </div>
 </div>
