@@ -1,9 +1,10 @@
-import { Routes } from '@angular/router';
+import {Routes} from '@angular/router';
 import {LoginComponent} from "./modules/auth/login/login.component";
 import {HomeComponent} from "./modules/home/pages/home/home.component";
 import {RegisterComponent} from "./modules/auth/register/register.component";
 import {AdministrationComponent} from "./modules/home/pages/administration/administration.component";
 import {authGuard} from "./core/guards/auth.guard";
+import {Page404Component} from "./shared/page-404/page-404.component";
 
 export const routes: Routes = [
 
@@ -17,7 +18,7 @@ export const routes: Routes = [
     component: LoginComponent
   },
   {
-    path:'register',
+    path: 'register',
     component: RegisterComponent
   },
   {
@@ -32,6 +33,6 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'home'
+    component: Page404Component
   }
 ];

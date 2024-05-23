@@ -32,14 +32,14 @@ export class LoginComponent implements OnInit {
     this.initFormLogin();
   }
 
-  initFormLogin(){
+  initFormLogin() {
     this.formLogin = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.min(4)]),
       password: new FormControl('', [Validators.required, Validators.min(4)])
     })
   }
 
-  sendFormLogin(){
+  sendFormLogin() {
     console.log('ASDASD')
     const data = {
       email: this.formLogin.get("email")?.value,
