@@ -18,7 +18,7 @@
   }
 
   .content-form{
-    width: 65%;
+    width: 100%;
 
     .title {
       display: flex;
@@ -50,49 +50,4 @@
     }
 
   }
-
-  .show-img {
-    width: 35%;
-    margin:20px 0 20px 20px;
-    height: 520px;
-    min-height: 520px;
-    overflow: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-
-    span{
-      font-weight: bold;
-      color: #776258;
-    }
-
-    .content-img {
-      position: relative;
-
-      img {
-        border-radius: 4px;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-        object-fit: contain;
-      }
-
-      .icon-absolute {
-        background-color: #5a5a5a;
-        color: white;
-        font-size: 20px;
-        position: absolute;
-        padding: 6px;
-        right: 8px;
-        top: 6px;
-        border-radius: 6px;
-
-        &:hover{
-          background-color: red;
-          cursor: pointer;
-        }
-      }
-    }
-
-
-  }
-
 }

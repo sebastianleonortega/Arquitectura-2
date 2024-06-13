@@ -49,8 +49,8 @@
         display: flex;
         align-items: center;
         flex-direction: column;
-        justify-content: center;
-        gap: 10px;
+        justify-content: flex-start;
+        gap: 20px;
         width: 500px;
         height: 100%;
 
@@ -73,11 +73,10 @@
             font-weight: 500;
             color: whitesmoke;
             border-radius: 12px;
-            background-color: rgba(34, 54, 110, 0.4);
-            transition: all linear .25s;
+            background-color: #2c2c2c;
 
-            &:first-child {
-              background-color: #2c2c2c;
+            &:last-child {
+              background-color: rgba(34, 54, 110, 0.4);
 
               &:hover {
                 background-color: rgba(34, 54, 110, 0.4);
@@ -138,6 +137,7 @@
                   transition: all linear .25s;
                 }
               }
+
             }
           }
         }
@@ -154,8 +154,11 @@
             font-weight: 600;
           }
         }
+
       }
+
     }
+
   }
 }
 
@@ -170,3 +173,4 @@
     transform: scale(1);
   }
 }
+

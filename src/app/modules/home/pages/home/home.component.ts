@@ -53,8 +53,8 @@ export class HomeComponent implements OnInit {
       this.getProduct();
     } else {
       this.products = this.products.filter(product =>
-        product.title.toLowerCase().includes(text) ||
-        product.description.toLowerCase().includes(text)
+        product.nombre.toLowerCase().includes(text) ||
+        product.detalle.toLowerCase().includes(text)
       );
     }
   }
@@ -62,21 +62,13 @@ export class HomeComponent implements OnInit {
   getProduct() {
     this._home.getProduct().subscribe({
       next: (data) => {
-        // this._loader.hide();
-
+        console.log(data)
         this.products = data;
-        data.forEach(
-          (item: any) => {
-            if (item.images[0].startsWith('["')) {
-              item.images = JSON.parse(item.images);
-            }
-          }
-        )
       }
     })
   }
 
-  productDetail(id: number) {
+  productDetail(id: any) {
     this._dialog.open(ProductComponent, {
       width: '1000px',
       height: '440px',
@@ -92,7 +84,7 @@ export class HomeComponent implements OnInit {
 
   logOut() {
     localStorage.clear();
-    this._route.navigateByUrl('/login')
+    this._route.navigateByUrl('/login').then();
   }
 
 }

@@ -32,28 +32,12 @@
           </div>
         </div>
       </div>
-      <div class="col-12">
-        <div class="form-container">
-          <div class="form-group">
-            <label class="form-label"> Categoria</label>
-            <ng-select [items]="categories"
-                       bindValue="id"
-                       bindLabel="name"
-                       class="custom-two form-ng-select"
-                       formControlName="categoryId"
-                       appValidateErrors
-                       placeholder="Seleccione una opción"
-                       [searchable]="false">
-            </ng-select>
-          </div>
-        </div>
-      </div>
+
       <div class="col-12 ">
         <div class="form-container">
           <div class="form-group">
             <label class="form-label">Url de la imagen</label>
-            <button class="icon-arrow-circle-right plus-icon" ></button>
-            <input class="form-input input-plus" (change)="pushImages()" appValidateErrors placeholder="Ingrese la url de la imagen" formControlName="images" >
+            <input class="form-input input-plus" appValidateErrors placeholder="Ingrese la url de la imagen" formControlName="images" >
           </div>
         </div>
       </div>
@@ -62,19 +46,6 @@
       <button *ngIf="showTitle" class="btn-general" (click)="sendFormProduct()">Editar</button>
     </form>
   </div>
-
-
-  <div class="col-12 show-img">
-    <span>Imagenes:</span>
-    @for (item of images; track item) {
-      <div class="content-img">
-        <em class="icon-trash icon-absolute" (click)="deleteImage($index)"></em>
-        <img ngSrc="{{item}}" alt="" width="260" height="250" >
-      </div>
-    }
-  </div>
-
-
 
 </div>
 

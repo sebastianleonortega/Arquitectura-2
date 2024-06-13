@@ -17,10 +17,12 @@ export class Page404Component implements OnInit {
 
   ngOnInit() {
     setTimeout(() => {
-      if (!localStorage.getItem('access_token')) {
-        this._route.navigateByUrl('login').then();
-      } else {
-        this._route.navigateByUrl('home').then();
+      if (typeof window !== 'undefined' && window.localStorage && localStorage.getItem("access_token")) {
+        if (!localStorage.getItem('access_token')) {
+          this._route.navigateByUrl('login').then();
+        } else {
+          this._route.navigateByUrl('home').then();
+        }
       }
     }, 1500)
   }

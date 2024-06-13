@@ -40,8 +40,8 @@ export class AdministrationComponent implements OnInit {
 
   addProduct() {
     const dialogRef = this._dialog.open(EditProductComponent, {
-      width: "800px",
-      height: "600px",
+      width: "500px",
+      height: "524px",
     })
 
     dialogRef.afterClosed().subscribe({
@@ -51,10 +51,11 @@ export class AdministrationComponent implements OnInit {
     })
   }
 
-  editProduct(id: number) {
+  editProduct(id: any) {
+    console.log(id)
     const dialogRef = this._dialog.open(EditProductComponent, {
-      width: "800px",
-      height: "600px",
+      width: "500px",
+      height: "524px",
       data: id
     })
 
@@ -66,7 +67,7 @@ export class AdministrationComponent implements OnInit {
 
   }
 
-  deleteProduct(id: number) {
+  deleteProduct(id: any) {
     this._home.deleteProduct(id).subscribe({
       next: () => {
         this._alert.success("producto Eliminado")
@@ -81,13 +82,8 @@ export class AdministrationComponent implements OnInit {
       next: (data) => {
         this.products = data;
         console.log(data)
-        data.forEach(
-          (item: any) => {
-            if (item.images[0].startsWith('["')) {
-              item.images = JSON.parse(item.images);
-            }
-          }
-        )
+
+
       }
     })
   }

@@ -5,7 +5,7 @@
     </div>
     <div class="content-options">
       <span>Productos</span>
-      <span>Categoria</span>
+<!--      <span>Categoria</span>-->
     </div>
   </div>
   <div class="content-admin">
@@ -20,25 +20,22 @@
         <tr>
           <th>Options</th>
           <th>Nombre</th>
+          <th>Descripción</th>
           <th>Precio</th>
           <th>Imagen</th>
-          <th>Categoria</th>
-          <th>Fecha de creacion</th>
-          <th>Fecha de actualizacion</th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let product of products | paginate: { itemsPerPage: 8, currentPage: page }">
           <td>
-            <button><em class="icon-pencil" (click)="editProduct(product.id)"></em></button>
-            <button><em class="icon-trash" (click)="deleteProduct(product.id)"></em></button>
+            <button><em class="icon-pencil" (click)="editProduct(product.id_producto)"></em></button>
+            <button><em class="icon-trash" (click)="deleteProduct(product.id_producto)"></em></button>
           </td>
-          <td>{{product.title}}</td>
-          <td>${{product.price}}</td>
-          <td><img [src]="product.images" alt="" class="avatar"></td>
-          <td><span >{{product.category.name}}</span></td>
-          <td>{{product.creationAt | date: 'dd/MM/yyyy - hh:mm a'}}</td>
-          <td>{{product.updatedAt | date: 'dd/MM/yyyy - hh:mm a'}}</td>
+          <td>{{product.nombre}}</td>
+          <td>{{product.detalle}}</td>
+          <td>${{product.valor}}</td>
+          <td><img [src]="product.img" alt="" class="avatar"></td>
+
         </tr>
         </tbody>
       </table>

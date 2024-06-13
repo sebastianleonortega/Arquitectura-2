@@ -18,19 +18,18 @@
     <div class="card" *ngFor="let product of products">
       <div class="profile-pic">
         <em class="icon-heart"></em>
-        <img [src]="product.images[0]" alt="{{product.title}}"/>
+        <img [src]="product.img" alt="{{product.valor}}"/>
       </div>
       <div class="details">
         <div class="content">
-          <h2>{{ product.title | titlecase }}</h2>
-          <p class="tag">{{ product.category.name }}</p>
-          <p class="about">{{ product.description }}</p>
+          <h2>{{ product.nombre | titlecase }}</h2>
+          <p class="about">{{ product.detalle }}</p>
         </div>
         <div class="buttons">
           <div class="price">
-            <span> {{ formatPrice(product.price) }}</span>
+            <span> {{ formatPrice(product.valor) }}</span>
           </div>
-          <a (click)="productDetail(product.id)" class="link"><em class="icon-eye"></em></a>
+          <a (click)="productDetail(product.id_producto)" class="link"><em class="icon-eye"></em></a>
         </div>
       </div>
     </div>

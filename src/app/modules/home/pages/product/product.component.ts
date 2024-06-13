@@ -25,10 +25,7 @@ export class ProductComponent implements OnInit{
 
   product?: Product ;
   productId: string | any = '' ;
-  parsedImages: string[] = [];
-  carouselData: any = [];
 
-  currentIndex: number = 0;
 
   constructor(
     private _home: HomeService,
@@ -39,7 +36,6 @@ export class ProductComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.startAutoPlay();
     this.getProductById(this.productId);
   };
 
@@ -54,34 +50,10 @@ export class ProductComponent implements OnInit{
   getProductById(id : any){
     this._home.getProductById(id).subscribe({
       next: (data) => {
-        this.parsedImages =  data.images;
-
-        if (data.images[0].startsWith('["')) {
-         this.parsedImages = JSON.parse(data.images);
-        }
         this.product = data;
-        this.parsedImages =  JSON.parse(data.images);
-
-        this.carouselData  = this.parsedImages.map((url, index) => ({
-          id: index + 1,
-          image: url
-        }));
-
+        console.log(data)
       }
     })
-  }
-
-  prevItem(): void {
-    this.currentIndex = (this.currentIndex === 0) ? this.carouselData.length - 1 : this.currentIndex - 1;
-  }
-  nextItem(): void {
-    console.log(this.currentIndex)
-    this.currentIndex = (this.currentIndex === this.carouselData.length - 1) ? 0 : this.currentIndex + 1;
-  }
-  startAutoPlay(): void{
-    setInterval(() => {
-      this.nextItem();
-    }, 8000); // 8000 milisegundos = 8 segundos
   }
 
 }

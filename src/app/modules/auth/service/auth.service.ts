@@ -7,17 +7,17 @@ import {Observable} from "rxjs";
 })
 export class AuthService {
 
-  api = 'https://api.escuelajs.co/api/v1/auth/login'
+  api = 'http://localhost:3100/auth'
 
   constructor(
     private _http: HttpClient,
   ) { }
 
   public login(data: any): Observable<any> {
-    return this._http.post<any>(this.api, data)
+    return this._http.post<any>(this.api +'/', data)
   }
 
   public register(data: any): Observable<any> {
-    return this._http.post<any>('https://api.escuelajs.co/api/v1/users/', data)
+    return this._http.post<any>(this.api + '/register', data)
   }
 }

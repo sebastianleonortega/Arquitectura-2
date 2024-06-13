@@ -1,7 +1,6 @@
-import {Component, EventEmitter, Inject, OnInit, Output, WritableSignal} from '@angular/core';
+import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
 import {HomeService} from "../../service/home.service";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {ActivatedRoute} from "@angular/router";
 import {NgIf, NgOptimizedImage} from "@angular/common";
 import {NgSelectModule} from "@ng-select/ng-select";
 import {InputMaskDirective} from "../../../../core/directives/input-mask.directive";
@@ -10,7 +9,6 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatIcon} from "@angular/material/icon";
 import {AlertService} from "../../../../core/services/alert.service";
-import {Category} from "../../interfaces/product";
 import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
 import {MessageErrorsDirective} from "../../../../shared/directives/field-errors/directive/message-errors.directive";
 import {LoadingService} from "../../../../core/services/loading.service";
@@ -43,7 +41,6 @@ export class EditProductComponent implements OnInit {
   productId: string | any = '';
 
   images: string[] = []
-  categories: Category[] = [];
 
   @Output() addedProduct: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() editProduct: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -61,7 +58,6 @@ export class EditProductComponent implements OnInit {
 
   ngOnInit() {
     this.initFormProduct();
-    this.getCategories();
 
     if (this.productId){
       this.getProductById(this.productId);
@@ -72,33 +68,23 @@ export class EditProductComponent implements OnInit {
     this._loader.show();
     this._home.getProductById(id).subscribe({
       next: (data) => {
+        console.log(data)
         this.setDataProduct(data);
         this._loader.hide();
-        if (data.images[0].startsWith('["')) {
-          this.images = JSON.parse(data.images);
-        }
         this.showTitle = true;
       }, error: () => {
         this._alert.error("error al obtener producto")
-      this._loader.show();
+      this._loader.hide();
 
     }
     })
   }
 
-  getCategories() {
-    this._home.getCategories().subscribe({
-      next: (data: Category[] ) => {
-        this.categories = data;
-      }
-    })
-  }
-
   setDataProduct(data: any) {
-    this.formProduct.get('title')?.setValue(data['title']);
-    this.formProduct.get('price')?.setValue(data['price']);
-    this.formProduct.get('description')?.setValue(data['description']);
-    this.formProduct.get('categoryId')?.setValue(data['category']['id']);
+    this.formProduct.get('title')?.setValue(data['nombre']);
+    this.formProduct.get('price')?.setValue(data['valor']);
+    this.formProduct.get('description')?.setValue(data['detalle']);
+    this.formProduct.get('images')?.setValue(data['img']);
   }
 
   initFormProduct() {
@@ -106,8 +92,7 @@ export class EditProductComponent implements OnInit {
       title: new FormControl('', [Validators.required]),
       price: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
-      categoryId: new FormControl(null, [Validators.required]),
-      images: new FormControl('', ),
+      images: new FormControl('',[Validators.required] ),
     })
   }
 
@@ -123,11 +108,10 @@ export class EditProductComponent implements OnInit {
     if (this.formProduct.valid) {
       this._loader.show();
       const data = {
-        title: this.formProduct.get("title")?.value,
-        price: this.formProduct.get("price")?.value,
-        description: this.formProduct.get("description")?.value,
-        categoryId: this.formProduct.get("categoryId")?.value,
-        images: this.images
+        nombre: this.formProduct.get("title")?.value,
+        valor: this.formProduct.get("price")?.value,
+        detalle: this.formProduct.get("description")?.value,
+        img: this.formProduct.get("images")?.value,
       }
       if (this.productId != null) {
         this._home.updateProduct(this.productId, data).subscribe({
@@ -159,21 +143,6 @@ export class EditProductComponent implements OnInit {
     }
   }
 
-
-  pushImages(){
-    const img = this.formProduct.get('images')?.value;
-    if (this.imageURLValidator({ value: img } as FormControl) === null) {
-      this.formProduct.get('images')?.setValue("");
-      this.images.push(img);
-    } else {
-      this.formProduct.get('images')?.setValue("");
-      this._alert.error("Url no valida")
-    }
-  }
-
-  deleteImage(position: number){
-    this.images.splice(position, 1);
-  }
 
   closeModal(){
     this._dialog.closeAll();

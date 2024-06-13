@@ -37,37 +37,34 @@ export class LoginComponent implements OnInit {
     this.initFormLogin();
   }
 
-  initFormLogin(){
+  initFormLogin() {
     this.formLogin = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.min(4)]),
+      username: new FormControl('', [Validators.required, Validators.min(4)]),
       password: new FormControl('', [Validators.required, Validators.min(4)])
     })
   }
 
-  sendFormLogin(){
-    if (this.formLogin.valid){
+  sendFormLogin() {
+    if (this.formLogin.valid) {
       this._loader.show();
-
-
-    const data = {
-      email: this.formLogin.get("email")?.value,
-      password: this.formLogin.get("password")?.value,
-      // email: "john@mail.com",
-      // password: "changeme",
-    }
-    this._auth.login(data).subscribe({
-      next: (r) => {
-        this._route.navigateByUrl('home').then();
-        localStorage.setItem("access_token", r.access_token)
-        this._loader.hide();
-
-      }, error: () =>{
-        this._loader.hide();
-        this._alert.error("credenciales icorrectas")
-
+      const data = {
+        username: this.formLogin.get("username")?.value,
+        password: this.formLogin.get("password")?.value,
       }
-    })
-  }else {
+      this._auth.login(data).subscribe({
+        next: (r) => {
+          this._route.navigateByUrl('home').then();
+          this._alert.success(r.msg)
+          localStorage.setItem("access_token", r.token)
+          this._loader.hide();
+
+        }, error: () => {
+          this._loader.hide();
+          this._alert.error("credenciales icorrectas")
+
+        }
+      })
+    } else {
       this._alert.warning("formulario no valido")
     }
   }
