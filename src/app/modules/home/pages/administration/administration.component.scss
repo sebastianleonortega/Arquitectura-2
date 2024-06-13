@@ -56,9 +56,15 @@
   .header-table{
     width: 90%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     padding: 20px 0 20px 40px;
+
+    span{
+      font-size: 24px;
+      font-weight: bold;
+      color: #5a5a5a;
+    }
 
     .btn-general{
       margin: 0;

@@ -10,6 +10,7 @@
   </div>
   <div class="content-admin">
     <div class="header-table">
+      <span>Lista de productos</span>
       <button class="btn-general" (click)="addProduct()">Agregar producto</button>
     </div>
 
@@ -34,7 +35,7 @@
           <td>{{product.nombre}}</td>
           <td>{{product.detalle}}</td>
           <td>${{product.valor}}</td>
-          <td><img [src]="product.img" alt="" class="avatar"></td>
+          <td style="text-align: center !important;"><img [src]="product.img" alt="" class="avatar"></td>
 
         </tr>
         </tbody>
